@@ -15,6 +15,7 @@ A lightweight, local Retrieval-Augmented Generation (RAG) API built with **FastA
 - [Local Development](#local-development)
 - [Running with Docker](#running-with-docker-)
 - [API Endpoints](#api-endpoints-)
+- [Roadmap + Future Improvements](#roadmap--future-improvements-)
 
 
 ## Local Development 🖥️
@@ -87,3 +88,11 @@ A lightweight, local Retrieval-Augmented Generation (RAG) API built with **FastA
         "question": "What is covered in the document?"
     }
     ```
+
+
+## Roadmap & Future Improvements 🏃
+
+- **Modular Model Loading:** Separate the heavy local embedding models from the core Docker image, allowing users to build a lightweight container and plug in external providers (e.g., OpenAI, Anthropic, or local Ollama). This can reduce build times allowing for faster deployment if the user is already in possession of an AI API.
+- **Async Document Processing:** Implement background task workers (using Celery or FastAPI BackgroundTasks) to handle large multi-page PDF ingestions without blocking HTTP threads.
+- **Authentication & Rate Limiting:** Add JWT-based security and API key validation for enterprise-grade access control.
+- **Observability:** Integrate structured logging and telemetry (Prometheus/Grafana metrics).
