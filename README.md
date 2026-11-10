@@ -3,10 +3,10 @@
 A lightweight, local Retrieval-Augmented Generation (RAG) API built with **FastAPI**, **ChromaDB**, and **Docker**. Designed as a high-performance boilerplate for semantic search and document querying.
 
 ## Tech Stack
-* **Framework:** FastAPI (Python)
-* **Vector Database:** ChromaDB (Local persistent vector storage)
-* **Embeddings:** Sentence-Transformers (Running locally on CPU)
-* **Containerization:** Docker
+- **Framework:** FastAPI (Python)
+- **Vector Database:** ChromaDB (Local persistent vector storage)
+- **Embeddings:** Sentence-Transformers (Running locally on CPU)
+- **Containerization:** Docker
 
 
 
@@ -56,6 +56,7 @@ A lightweight, local Retrieval-Augmented Generation (RAG) API built with **FastA
    ```
 
 2. Build the Docker Image:
+*(warning: building the docker image could take up to 30 minutes depending on the specs of your system)*
     ```bash
     docker build -t docuquery-ai .
     ```
