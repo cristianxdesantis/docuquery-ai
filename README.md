@@ -79,7 +79,7 @@ A lightweight, local Retrieval-Augmented Generation (RAG) API built with **FastA
         "text": "Your document content here..."
     }
     ```
-- `POST /query`:Performs semantic similarity search against indexed documents.
+- `POST /query`: Performs semantic similarity search against indexed documents.
     - Payload Example:
     ```bash
     {
