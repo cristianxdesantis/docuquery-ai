@@ -1,10 +1,10 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel #what is pydantic and base model?
+from pydantic import BaseModel
 import chromadb
 
 app = FastAPI(title="DocuQueryAI", description="A simple and easy to use local RAG API")
 
-chroma_client = chromadb.Client()  #what is a client in this context
+chroma_client = chromadb.Client()
 collection = chroma_client.get_or_create_collection(name="documents_collection")
 
 class DocumentInput(BaseModel):
@@ -14,22 +14,22 @@ class DocumentInput(BaseModel):
 class QueryInput(BaseModel):
     question: str
 
-@app.get("/") #Could this be... an API?
+@app.get("/")
 def read_root():
     return {"status": "DocuQueryAI is running successfully!"}
 
-@app.post("/upload")   #???????
-def upload_document(doc: DocumentInput):    #doc?? was an object called doc created here as parameter for the function?
+@app.post("/upload")
+def upload_document(doc: DocumentInput):
     try:
         collection.add(
-            documents = [doc.text], #so, document becomes literally an object storing the text of the pdf or whatever I am using as material? Can python do that?
+            documents = [doc.text],
             ids = [doc.doc_id]
         )
         return {"message": f"Documenbt '{doc.doc_id}' successfully indexed."}
     except Exception as e:
         raise HTTPException(status_code = 500, detail = str(e))
 
-@app.post("/query") #Waitttttttt, this is the API!!!!! Is this how APIs work? But I still can't understand the connection between this line of code and the ones below. When does this api loine finish? WHen the next one starts? It doesn't have a parenthesis start and finish...
+@app.post("/query")
 def query_documents(query: QueryInput):
     try:
         results = collection.query(
@@ -37,7 +37,7 @@ def query_documents(query: QueryInput):
             n_results = 1
         )
 
-        matched_docs = results.get("documents", [[]])[0]  #WTF happened here?? why so many empty parenthesis? What does this mean?
+        matched_docs = results.get("documents", [[]])[0]
 
         if not matched_docs:
             return {"answer": "No relevant context found in the database."}
@@ -50,4 +50,4 @@ def query_documents(query: QueryInput):
             "note": "This is the RAG retrieval step. Ready to plug into an LLM API."
         }
     except Exception as e:
-        raise HTTPException(status_code = 500, detail = str(e))  #status code 500? is it like the classic 401 forbidden page? shuld i learn status codes as a software dev? So i can use them all around?
+        raise HTTPException(status_code = 500, detail = str(e))
